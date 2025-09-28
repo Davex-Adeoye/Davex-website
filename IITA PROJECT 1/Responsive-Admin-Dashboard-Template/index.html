@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Issues Help Center</title>
+    <link rel="icon" href="ilogo.jpg" type="image/x-icon">
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f6f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+      header {
+        background: #e05206ff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .search-bar {
+        margin: 20px auto;
+        max-width: 600px;
+        display: flex;
+        justify-content: center;
+      }
+      .search-bar input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+      }
+      .problems {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 0 20px;
+      }
+      .problem {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .problem:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        background: #e05206ff;
+        color: white;
+      }
+      .solution {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 25px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: none;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+      .solution h2 {
+        margin-top: 0;
+        color: #e05206ff;
+      }
+      iframe {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>💻 Common System Issues & Solutions</h1>
+      <p>Find quick fixes and tutorials for everyday computer problems</p>
+    </header>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search for a problem..."
+        onkeyup="filterProblems()"
+      />
+    </div>
+
+    <div class="problems" id="problems">
+      <div class="problem" onclick="showSolution('boot')">
+        Computer Won’t Boot
+      </div>
+      <div class="problem" onclick="showSolution('wifi')">
+        Wi-Fi Not Working
+      </div>
+      <div class="problem" onclick="showSolution('slow')">Computer is Slow</div>
+      <div class="problem" onclick="showSolution('virus')">
+        Virus or Malware Infection
+      </div>
+      <div class="problem" onclick="showSolution('sound')">
+        No Sound on Computer
+      </div>
+      <div class="problem" onclick="showSolution('printer')">
+        Printer Not Working
+      </div>
+      <div class="problem" onclick="showSolution('color')">
+        Colored Printer Printing Black & White Only
+      </div>
+      <div class="problem" onclick="showSolution('filesappear')">
+        How To Make Files On The Desktop Appear With Default App Logo
+      </div>
+      <div class="problem" onclick="showSolution('HpLaser')">
+        HP Laser 150a Waste Toner Container Error
+      </div>
+      <div class="problem" onclick="showSolution('security')">
+        How To Resolve Security Log Full Only Admin Can Sign In Error
+      </div>
+    </div>
+
+    <div id="solution" class="solution">
+      <h2 id="solution-title"></h2>
+      <p id="solution-text"></p>
+      <iframe
+        id="solution-video"
+        src=""
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <script>
+      const solutions = {
+        boot: {
+          title: "Fix: Computer Won’t Boot",
+          text: "Check if the power supply is connected, remove external devices, and try booting in Safe Mode.",
+          video: "https://www.youtube.com/embed/YbaqMvyMYnY",
+        },
+        wifi: {
+          title: "Fix: Wi-Fi Not Working",
+          text: "Restart your router, update your network drivers, and check your adapter settings.",
+          video: "https://www.youtube.com/embed/8FvO4I0EIek",
+        },
+        slow: {
+          title: "Fix: Computer is Slow",
+          text: "Delete temporary files, disable startup apps, and consider upgrading your RAM or SSD.",
+          video: "https://www.youtube.com/embed/j2RW8Rt1nP4",
+        },
+        virus: {
+          title: "Fix: Virus or Malware Infection",
+          text: "Run a full antivirus scan, remove suspicious programs, and update your security patches.",
+          video: "https://www.youtube.com/embed/JPSHlEbI8JI",
+        },
+        sound: {
+          title: "Fix: No Sound on Computer",
+          text: "Check volume settings, update audio drivers, and verify speakers or headphones.",
+          video: "https://www.youtube.com/embed/kg5U4gozgeo",
+        },
+        printer: {
+          title: "Fix: Printer Not Working",
+          text: "Ensure printer is connected, reinstall printer drivers, and check paper/jam issues.",
+          video: "https://www.youtube.com/embed/pK8a_Jsj3wE",
+        },
+        filesappear: {
+          title:
+            "Fix: How To Make Files On The Desktop Appear With Default App Logo",
+          text: "Rebuild Windows icon cache (taskkill explorer.exe, delete IconCache.db, restart).",
+          video: "https://www.youtube.com/embed/ZVWzCe2YL3Y",
+        },
+        color: {
+          title: "Fix: Colored Printer Printing Black & White Only",
+          text: "Check printer settings → set to Color instead of Grayscale/Monochrome",
+          video: "https://www.youtube.com/embed/uN0_IhSLvvw",
+        },
+        HpLaser: {
+          title: "Fix: HP Laser 150a Waste Toner Container Error",
+          text: "Remove, clean, or replace the waste toner container.",
+          video: "https://www.youtube.com/embed/ce_PVQwSkK8",
+        },
+        security: {
+          title:
+            "Fix: How To Resolve Security Log Full Only Admin Can Sign In Error",
+          text: "Log in as admin → clear Windows Event Viewer Security logs.",
+          video: "https://www.youtube.com/embed/1iJw4yzds20",
+        },
+      };
+
+      function showSolution(problem) {
+        document.getElementById("solution-title").innerText =
+          solutions[problem].title;
+        document.getElementById("solution-text").innerText =
+          solutions[problem].text;
+        document.getElementById("solution-video").src =
+          solutions[problem].video;
+        document.getElementById("solution").style.display = "block";
+        document
+          .getElementById("solution")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function filterProblems() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let problems = document
+          .getElementById("problems")
+          .getElementsByClassName("problem");
+        for (let i = 0; i < problems.length; i++) {
+          let txtValue = problems[i].textContent || problems[i].innerText;
+          problems[i].style.display = txtValue.toLowerCase().includes(input)
+            ? ""
+            : "none";
+        }
+      }
+    </script>
+  </body>
+</html>
